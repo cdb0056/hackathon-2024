@@ -10,7 +10,7 @@ public class app {
         window.setVisible(true); // this makes the window show up 
     }
 
-    // call the method :D
+    // call the method :D 
     public static void main(String[] args) {
         initWindow(); // call the method to initialize the window
     }
