@@ -7,7 +7,7 @@ public class app {
 
         window.setResizable(true); // dont allow user to resize window
         window.setSize(400, 300); // set initial size of the window
-        window.setVisible(true); // this makes the window show up
+        window.setVisible(true); // this makes the window show up 
     }
 
     // call the method :D
