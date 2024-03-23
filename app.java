@@ -1,4 +1,3 @@
-//package hackathon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,9 +6,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
-/*import static board.COLUMNS;
-import static board.ROWS;
-import static board.TILE_SIZE;*/
 
 public class app {
     private static JFrame window;
@@ -23,6 +19,12 @@ public class app {
         window.pack();
         window.setLocationRelativeTo(null); // window appears in the middle of the screen
         window.setSize(400,300);
+
+        window.setLayout(new BorderLayout()); // set layout manager
+
+        board gameBoard = new board(); // create an instance of the board
+
+        window.add(gameBoard, BorderLayout.CENTER); // put the board to the center of the JFrame
         
         window.setVisible(true); // this makes the window show up 
     }
@@ -31,7 +33,6 @@ public class app {
     public static void main(String[] args) {
         initWindow(); // call the method to show the window
 
-        /*board board = new board(listener);
-        window.add(board);*/
+        
     }
 }

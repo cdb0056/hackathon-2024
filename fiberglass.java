@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 
 public class fiberglass { 
 
@@ -24,5 +26,11 @@ public class fiberglass {
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
+    }
+
+    public void draw(Graphics g, ImageObserver observer) { // i guess draw the image on the board
+        g.drawImage(
+            image, pos.x * board.TILE_SIZE, pos.y * board.TILE_SIZE, observer
+        );
     }
 }

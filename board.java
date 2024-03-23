@@ -1,4 +1,4 @@
-//package hackathon;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -37,6 +37,15 @@ public class board extends JPanel {
 
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawBackground(g);
+        drawGlass(g);
+        drawFiber(g);
+        drawFiberglass(g);
+    }
+
     private void drawBackground(Graphics g) { // draw the bg, may look weird cuz its orginally supposed to be checkered
         g.setColor(new Color(232, 232, 232));
         for (int row = 0; row < ROWS; row++) {
@@ -53,5 +62,17 @@ public class board extends JPanel {
                 }
             }    
         }
+    }
+
+    private void drawGlass(Graphics g) {
+        glass.draw(g, this);
+    }
+
+    private void drawFiber(Graphics g) {
+        fiber.draw(g, this);
+    }
+
+    private void drawFiberglass(Graphics g) {
+        fiberglass.draw(g, this);
     }
 }
