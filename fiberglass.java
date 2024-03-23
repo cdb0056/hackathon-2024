@@ -19,7 +19,8 @@ public class fiberglass {
     private void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
-            image = ImageIO.read(new File("fiberglass-insulation.png")); // load in the image. placeholder image rn
+            final String imageName = "fiberglass insulation.png";
+            image = ImageIO.read(new File("res/" + imageName));  // load in the image. placeholder image rn
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
