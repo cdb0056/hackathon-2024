@@ -12,7 +12,7 @@ public class fiberglass {
 
     public Point pos; // position on the screen
 
-    private boolean isVisible = true;
+    private boolean isVisible = false;
 
     // getter method for visibility
     public boolean isVisible() {

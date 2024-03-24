@@ -18,6 +18,8 @@ public class fiber {
     public int x = 100; //CHANGE THESE X, Y  TO CHANGE WHERE THE FABRIC SPAWNS. SAME FOR ALL OBJECTS
     public int y = 100;
 
+    private boolean isVisible = true;
+
 
     public fiber() { // put the fiber on the screen (its just a F for now but ill make some pictures
                      // later) 
@@ -44,7 +46,7 @@ public class fiber {
             g.drawImage(
             image, pos.x, pos.y, 50, 50, observer
         );
-        System.out.println("x: " + pos.x + " y: " + pos.y);
+        //System.out.println("x: " + pos.x + " y: " + pos.y);
         //}
     }
 
@@ -73,5 +75,13 @@ public class fiber {
 
     public void setPosition(Point newPosition) {
         this.pos = newPosition;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 }

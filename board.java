@@ -29,6 +29,12 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     public boolean fiberDrag = false;
     public boolean  glassDrag = false;
 
+    public int fiberPosX;
+    public int fiberPosY;
+
+    public int glassPosX;
+    public int glassPosY;
+
     public board(ActionListener listener) {
         this.listener = listener;
     }
@@ -55,8 +61,11 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
         super.paintComponent(g);
         drawBackground(g);
         drawGlass(g);
-        drawFiberglass(g);
+        if (fiberglass.isVisible()) {
+            drawFiberglass(g);
+        }
         drawFiber(g);
+        //combine(g);
     }
 
     private void drawBackground(Graphics g) { // draw the bg, may look weird cuz its orginally supposed to be checkered
@@ -87,6 +96,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     private void drawFiberglass(Graphics g) {
         fiberglass.draw(g, this);
+        //fiberglass.setVisible(false);
     }
 
     // mouse listener methods
@@ -167,6 +177,7 @@ public void mouseDragged(MouseEvent e) {
         isDragging = false;
         fiberDrag = false;
         glassDrag = false;
+        combine();
 
     }
 
@@ -188,6 +199,20 @@ public void mouseDragged(MouseEvent e) {
     @Override 
     public void mouseMoved(MouseEvent e) {
         // when the mouse button is moved ?!
+    }
+
+    
+    private void combine() {
+        int tolerance = 5;
+        if (Math.abs(fiber.pos.x - glass.pos.x) <= tolerance && Math.abs(fiber.pos.y - glass.pos.y) <= tolerance) {
+            System.out.println("positions are equal");
+            fiberglass.setVisible(true);
+            fiber.setVisible(false);
+            glass.setVisible(false);
+        } else {
+            System.out.println("visible false");
+            //fiberglass.setVisible(false);
+        }
     }
 
 }

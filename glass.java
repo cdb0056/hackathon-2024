@@ -15,6 +15,16 @@ public class glass {
     public int x = 200;
     public int y = 200;
 
+    private boolean isVisible = true;
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
     public glass() { // put the glass on the screen (its just a G for now but ill make some pictures later)
         loadImage(); 
         pos = new Point(x, y);
