@@ -13,10 +13,22 @@ public class fiber extends JPanel {
 
     public Point pos; // fiber's position on the screen
 
+    private boolean isVisible = true;
+
+    // getter method for visibility
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    // Setter method for visibility
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
     public fiber() { // put the fiber on the screen (its just a F for now but ill make some pictures
                      // later) 
         loadImage();
-        pos = new Point(0, 0);
+        pos = new Point(100, 100);
 
     }
 
@@ -31,16 +43,19 @@ public class fiber extends JPanel {
     }
 
     public void draw(Graphics g, board b) { // draw the image
-        if (image != null) {
-            int scaledWidth = 50; 
+        if (isVisible && image != null) {
+            int scaledWidth = 50;
             int scaledHeight = 50;
             g.drawImage(image, pos.x, pos.y, scaledWidth, scaledHeight, this);
         }
     }
 
     public boolean contains(Point point) {
-        Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
-        return bounds.contains(point);
+        if (image != null) {
+            Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
+            return bounds.contains(point);
+        }
+        return false;
     }
 
     public void setPosition(Point newPosition) {

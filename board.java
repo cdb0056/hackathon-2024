@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 public class board extends JPanel implements MouseListener, MouseMotionListener {
     // board things
     public static final int TILE_SIZE = 50;
@@ -21,6 +22,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     private boolean isDragging = false;
     private int dragOffsetX, dragOffsetY;
     private Point draggedItemPosition;
+    private boolean isFiberOverGlass = false;
 
     public board(ActionListener listener) {
         this.listener = listener;
@@ -48,7 +50,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
         super.paintComponent(g);
         drawBackground(g);
         drawGlass(g);
-        drawFiberglass(g);
+        if(isFiberOverGlass) { // draw fiberglass only if fiber is over glass
+            drawFiberglass(g);
+        }
         drawFiber(g);
     }
 
@@ -84,6 +88,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     
     private void drawFiberglass(Graphics g) {
         if (isDragging && isFiberOverGlass()) {
+            fiber.setVisible(false); 
+            glass.setVisible(false); 
             fiberglass.draw(g, this);
         }
     }
@@ -112,7 +118,7 @@ public void mouseDragged(MouseEvent e) {
         int newY = mouseY - dragOffsetY;
 
         fiber.setPosition(new Point(newX, newY));
-        
+        isFiberOverGlass = isFiberOverGlass();
         repaint();
     }
 }
@@ -120,6 +126,7 @@ public void mouseDragged(MouseEvent e) {
     @Override
     public void mouseReleased(MouseEvent e) {
         // when the mouse button is released
+        isDragging = false;
     }
 
     @Override 

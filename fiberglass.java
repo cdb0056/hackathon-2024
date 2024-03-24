@@ -12,6 +12,18 @@ public class fiberglass {
 
     public Point pos; // position on the screen
 
+    private boolean isVisible = true;
+
+    // getter method for visibility
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    // Setter method for visibility
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
     public fiberglass() { // put the fiberglass insulation on the screen (its just an FG for now but ill
                           // make some pictures later)
         loadImage();
@@ -32,5 +44,9 @@ public class fiberglass {
         g.drawImage(
             image, pos.x, pos.y, 50, 50, observer
         );
+    }
+
+    public void setPosition(Point newPosition) {
+        this.pos = newPosition;
     }
 }
