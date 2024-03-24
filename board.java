@@ -207,8 +207,8 @@ public void mouseDragged(MouseEvent e) {
         if (Math.abs(fiber.pos.x - glass.pos.x) <= tolerance && Math.abs(fiber.pos.y - glass.pos.y) <= tolerance) {
             System.out.println("positions are equal");
             fiberglass.setVisible(true);
-            fiber.setVisible(false);
-            glass.setVisible(false);
+            fiber.setVisible(true);
+            glass.setVisible(true);
         } else {
             System.out.println("visible false");
             //fiberglass.setVisible(false);
