@@ -14,25 +14,40 @@ public class fiber {
 
     public Point pos; // fiber's position on the screen
     //public Point rectPos;
+    public Point startPos;
 
-    public int x = 100; //CHANGE THESE X, Y  TO CHANGE WHERE THE FABRIC SPAWNS. SAME FOR ALL OBJECTS
-    public int y = 100;
+    public int objectWidth;
+    public int objectHeight;
+
+    public int x = 565; //CHANGE THESE X, Y  TO CHANGE WHERE THE FABRIC SPAWNS. SAME FOR ALL OBJECTS
+    public int y = 25;
 
 
     public fiber() { // put the fiber on the screen (its just a F for now but ill make some pictures
                      // later) 
         loadImage(); 
         pos = new Point(x, y);
-        //pos.x = x;
-        //pos.y = y;
+        startPos = pos;
         
+
+    }
+
+    public int getStartX() {
+
+        return startPos.x;
+
+    }
+
+    public int getStartY() {
+
+        return startPos.y;
 
     }
 
     private void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
-            final String imageName = "fibers.png";
+            final String imageName = "fiber.png";
             image = ImageIO.read(new File("res/" + imageName)); // load in the image. placeholder image rn
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -52,12 +67,12 @@ public class fiber {
         //rectPos.x = 200;
         //rectPos.y = 200;
 
-        Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
-        return bounds.contains(point);
+        //Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
+        //return bounds.contains(point);
 
-        /* 
-        int objectWidth = image.getWidth();
-        int objectHeight = image.getHeight();
+        
+        objectWidth = image.getWidth();
+        objectHeight = image.getHeight();
 
         // Calculate the bounding box of the object
         int objectLeft = pos.x;
@@ -68,7 +83,7 @@ public class fiber {
         // Check if the point is within the bounding box
         return (point.x >= objectLeft && point.x <= objectRight &&
             point.y >= objectTop && point.y <= objectBottom);
-   */
+   
     }
 
     public void setPosition(Point newPosition) {
