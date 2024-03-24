@@ -5,22 +5,31 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
+import java.awt.image.ImageObserver;
 
-public class fiber extends JPanel {
+public class fiber {
 
-    public BufferedImage image; // image to represent fibrs
+    private BufferedImage image; // image to represent fibrs
 
     public Point pos; // fiber's position on the screen
+    //public Point rectPos;
+
+    public int x = 100;
+    public int y = 100;
+
 
     public fiber() { // put the fiber on the screen (its just a F for now but ill make some pictures
                      // later) 
-        loadImage();
-        pos = new Point(0, 0);
+        loadImage(); 
+        pos = new Point(x, y);
+        pos.x = x;
+        pos.y = y;
+        
 
     }
 
-    public void loadImage() { // function to actually load in the image, throws error if image not found or
+    private void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
             final String imageName = "fibers.png";
@@ -30,15 +39,19 @@ public class fiber extends JPanel {
         }
     }
 
-    public void draw(Graphics g, board b) { // draw the image
-        if (image != null) {
-            int scaledWidth = 50; 
-            int scaledHeight = 50;
-            g.drawImage(image, pos.x, pos.y, scaledWidth, scaledHeight, this);
-        }
+    public void draw(Graphics g, ImageObserver observer) { // draw the image
+        //if (image != null) {
+            g.drawImage(
+            image, pos.x, pos.y, 50, 50, observer
+        );
+        System.out.println("x: " + pos.x + " y: " + pos.y);
+        //}
     }
 
     public boolean contains(Point point) {
+        //rectPos.x = 200;
+        //rectPos.y = 200;
+
         Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
         return bounds.contains(point);
     }

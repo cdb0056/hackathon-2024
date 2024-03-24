@@ -22,6 +22,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     private int dragOffsetX, dragOffsetY;
     private Point draggedItemPosition;
 
+    public boolean fiberDrag = false;
+    public boolean  glassDrag = false;
+
     public board(ActionListener listener) {
         this.listener = listener;
     }
@@ -90,11 +93,21 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
         int mouseY = e.getY();
     
         // check if the mouse is pressed on the fiber object
-        if (fiber != null && fiber.contains(new Point(mouseX, mouseY))) {
+        if (fiber != null && fiber.contains(new Point(mouseX, mouseY)) ) {
             isDragging = true;
             dragOffsetX = mouseX - fiber.pos.x;
             dragOffsetY = mouseY - fiber.pos.y;
+            fiberDrag = true;
+
         }
+
+        if (glass != null && glass.contains(new Point(mouseX, mouseY)) ) {
+            isDragging = true;
+            dragOffsetX = mouseX - glass.pos.x;
+            dragOffsetY = mouseY - glass.pos.y;
+            glassDrag = true;
+        }
+
     }
 
     @Override
@@ -105,7 +118,25 @@ public void mouseDragged(MouseEvent e) {
         int newX = mouseX - dragOffsetX;
         int newY = mouseY - dragOffsetY;
 
-        fiber.setPosition(new Point(newX, newY));
+        if (fiberDrag == true) {
+            fiber.setPosition(new Point(newX, newY));
+        }
+
+        if (glassDrag == true) {
+            glass.setPosition(new Point(newX, newY));
+        }
+
+        //fiber.setPosition(new Point(newX, newY));
+
+        /*if (mouseX == fiber.pos.x && mouseY == fiber.pos.y) {
+            fiber.setPosition(new Point(newX, newY));
+        }
+
+        if (mouseX == glass.pos.x && mouseY == glass.pos.y) {
+            glass.setPosition(new Point(newX, newY));
+        }*/
+     
+
         
         repaint();
     }
@@ -114,6 +145,10 @@ public void mouseDragged(MouseEvent e) {
     @Override
     public void mouseReleased(MouseEvent e) {
         // when the mouse button is released
+
+        fiberDrag = false;
+        glassDrag = false;
+
     }
 
     @Override 
