@@ -10,7 +10,7 @@ public class fiberglass {
 
     private BufferedImage image; // image to represent fiberglass insulation
 
-    private Point pos; // position on the screen
+    public Point pos; // position on the screen
 
     public fiberglass() { // put the fiberglass insulation on the screen (its just an FG for now but ill
                           // make some pictures later)

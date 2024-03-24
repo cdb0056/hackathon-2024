@@ -12,7 +12,7 @@ public class fiber {
 
     private BufferedImage image; // image to represent fibrs
 
-    private Point pos; // fiber's position on the screen
+    public Point pos; // fiber's position on the screen
 
     public fiber() { // put the fiber on the screen (its just a F for now but ill make some pictures
                      // later) 

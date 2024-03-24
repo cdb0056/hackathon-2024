@@ -8,8 +8,6 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     public static final int ROWS = 12;
     public static final int COLUMNS = 18;
 
-    private ActionListener listener;
-
     // things that appear on the board
     // elements
     private glass glass;
@@ -17,6 +15,11 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     // results
     private fiberglass fiberglass;
+
+    // other
+    private ActionListener listener;
+    private boolean isDragging = false;
+    private int xOffset, yOffset;
 
     public board(ActionListener listener) {
         this.listener = listener;
@@ -32,6 +35,10 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
         // initialize some resulting elements
         fiberglass = new fiberglass();
+
+        // add mouse listeners
+        addMouseListener(this);
+        addMouseMotionListener(this);
 
     }
 
@@ -75,6 +82,39 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     // mouse listener methods
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // when the mouse button is pressed on a component
+
+        int mouseX = e.getX();
+        int mouseY = e.getY();
+
+        if (mouseX >= fiber.pos.x * TILE_SIZE && mouseX < (fiber.pos.x + 1) * TILE_SIZE && mouseY >= fiber.pos.y * TILE_SIZE && mouseY < (fiber.pos.y + 1) ) {
+            isDragging = true;
+            xOffset = mouseX - fiber.pos.x * TILE_SIZE;
+            yOffset = mouseY - fiber.pos.y * TILE_SIZE;
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // when the mouse button is pressed on a component
+        if (isDragging) {
+            // update fiber pos
+            fiber.pos.x = (e.getX() - xOffset) / TILE_SIZE;
+            fiber.pos.y = (e.getY() - yOffset) / TILE_SIZE;
+
+            // repaint board to update pos
+            repaint();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // when the mouse button is released
+    }
+
     @Override 
     public void mouseClicked(MouseEvent e) {
         // when the mouse button has been clicked (pressed and released)
@@ -93,21 +133,6 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     @Override 
     public void mouseMoved(MouseEvent e) {
         // when the mouse button is moved ?!
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        // when the mouse button is pressed on a component
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // when the mouse button is pressed on a component
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // when the mouse button is released
     }
 
 }

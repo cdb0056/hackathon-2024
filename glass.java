@@ -10,7 +10,7 @@ public class glass {
 
     private BufferedImage image; // image to represent glass
 
-    private Point pos; // glass's position on the screen
+    public Point pos; // glass's position on the screen
 
     public glass() { // put the glass on the screen (its just a G for now but ill make some pictures later)
         loadImage(); 
