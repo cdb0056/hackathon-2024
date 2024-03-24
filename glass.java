@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 
 public class glass {
@@ -30,5 +31,10 @@ public class glass {
         g.drawImage(
             image, pos.x, pos.y, 50, 50, observer
         );
+    }
+
+    public boolean contains(Point point) {
+        Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
+        return bounds.contains(point);
     }
 }

@@ -78,8 +78,14 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
         fiber.draw(g, this);
     }
 
+    private boolean isFiberOverGlass() {
+        return glass.contains(new Point(fiber.pos.x, fiber.pos.y));
+    }
+    
     private void drawFiberglass(Graphics g) {
-        fiberglass.draw(g, this);
+        if (isDragging && isFiberOverGlass()) {
+            fiberglass.draw(g, this);
+        }
     }
 
     // mouse listener methods
