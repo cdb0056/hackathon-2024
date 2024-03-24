@@ -36,7 +36,9 @@ public class fiber extends JPanel implements MouseListener, MouseMotionListener 
 
     public void draw(Graphics g, board b) { // draw the image
         if (image != null) {
-            g.drawImage(image, pos.x * b.TILE_SIZE, pos.y * b.TILE_SIZE, null);
+            int scaledWidth = 50; 
+            int scaledHeight = 50;
+            g.drawImage(image, pos.x, pos.y, scaledWidth, scaledHeight, this);
         }
     }
 
@@ -69,7 +71,7 @@ public class fiber extends JPanel implements MouseListener, MouseMotionListener 
             repaint();
         }
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {}
     @Override
