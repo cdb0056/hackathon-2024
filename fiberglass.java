@@ -8,7 +8,7 @@ import java.awt.image.ImageObserver;
 
 public class fiberglass { 
 
-    private BufferedImage image; // image to represent fiberglass insulation
+    public BufferedImage image; // image to represent fiberglass insulation
 
     public Point pos; // position on the screen
 
@@ -18,7 +18,7 @@ public class fiberglass {
         pos = new Point(0, 0);
     }
 
-    private void loadImage() { // function to actually load in the image, throws error if image not found or
+    public void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
             final String imageName = "fiberglass insulation.png";
@@ -30,7 +30,7 @@ public class fiberglass {
 
     public void draw(Graphics g, ImageObserver observer) { // i guess draw the image on the board
         g.drawImage(
-            image, pos.x * board.TILE_SIZE, pos.y * board.TILE_SIZE, observer
+            image, pos.x, pos.y, 50, 50, observer
         );
     }
 }

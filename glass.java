@@ -28,7 +28,7 @@ public class glass {
 
     public void draw(Graphics g, ImageObserver observer) { // i guess draw the image on the board
         g.drawImage(
-            image, pos.x * board.TILE_SIZE, pos.y * board.TILE_SIZE, observer
+            image, pos.x, pos.y, 50, 50, observer
         );
     }
 }
