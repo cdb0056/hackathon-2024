@@ -46,9 +46,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //drawBackground(g);
-        /*drawGlass(g);
-        drawFiberglass(g);*/
+        drawBackground(g);
+        //drawGlass(g);
+        //drawFiberglass(g);
         drawFiber(g);
     }
 
