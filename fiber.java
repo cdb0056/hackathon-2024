@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class fiber {
 
@@ -21,7 +23,7 @@ public class fiber {
     private void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
-            final String imageName = "fiber.png";
+            final String imageName = "fibers.png";
             image = ImageIO.read(new File("res/" + imageName)); // load in the image. placeholder image rn
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());

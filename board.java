@@ -1,10 +1,8 @@
-
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class board extends JPanel {
+public class board extends JPanel implements MouseListener, MouseMotionListener {
     // board things
     public static final int TILE_SIZE = 50;
     public static final int ROWS = 12;
@@ -75,4 +73,41 @@ public class board extends JPanel {
     private void drawFiberglass(Graphics g) {
         fiberglass.draw(g, this);
     }
+
+    // mouse listener methods
+    @Override 
+    public void mouseClicked(MouseEvent e) {
+        // when the mouse button has been clicked (pressed and released)
+    }
+
+    @Override 
+    public void mouseEntered(MouseEvent e) {
+        // when the mouse enters a component
+    }
+
+    @Override 
+    public void mouseExited(MouseEvent e) {
+        // when the mouse exits a component
+    }
+
+    @Override 
+    public void mouseMoved(MouseEvent e) {
+        // when the mouse button is moved ?!
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // when the mouse button is pressed on a component
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // when the mouse button is pressed on a component
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // when the mouse button is released
+    }
+
 }
