@@ -15,7 +15,7 @@ public class fiber {
     public Point pos; // fiber's position on the screen
     //public Point rectPos;
 
-    public int x = 100;
+    public int x = 100; //CHANGE THESE X, Y  TO CHANGE WHERE THE FABRIC SPAWNS. SAME FOR ALL OBJECTS
     public int y = 100;
 
 
@@ -23,8 +23,8 @@ public class fiber {
                      // later) 
         loadImage(); 
         pos = new Point(x, y);
-        pos.x = x;
-        pos.y = y;
+        //pos.x = x;
+        //pos.y = y;
         
 
     }
@@ -54,6 +54,21 @@ public class fiber {
 
         Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
         return bounds.contains(point);
+
+        /* 
+        int objectWidth = image.getWidth();
+        int objectHeight = image.getHeight();
+
+        // Calculate the bounding box of the object
+        int objectLeft = pos.x;
+        int objectRight = pos.x + objectWidth;
+        int objectTop = pos.y;
+        int objectBottom = pos.y + objectHeight;
+
+        // Check if the point is within the bounding box
+        return (point.x >= objectLeft && point.x <= objectRight &&
+            point.y >= objectTop && point.y <= objectBottom);
+   */
     }
 
     public void setPosition(Point newPosition) {

@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+//IGNORE ALL THE ETRA COMMENTED SHIT I GOT I DIDNT WANT TO LOSE ANYTHING. 
+
 public class board extends JPanel implements MouseListener, MouseMotionListener {
     // board things
     public static final int TILE_SIZE = 50;
@@ -20,7 +22,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     private ActionListener listener;
     private boolean isDragging = false;
     private int dragOffsetX, dragOffsetY;
+    private int dragOffsetX2, dragOffsetY2;
     private Point draggedItemPosition;
+    //public Point mousePoint;
 
     public boolean fiberDrag = false;
     public boolean  glassDrag = false;
@@ -91,13 +95,17 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     public void mousePressed(MouseEvent e) {
         int mouseX = e.getX();
         int mouseY = e.getY();
+
+        //mousePoint = new Point(mouseX, mouseY);
     
         // check if the mouse is pressed on the fiber object
         if (fiber != null && fiber.contains(new Point(mouseX, mouseY)) ) {
             isDragging = true;
             dragOffsetX = mouseX - fiber.pos.x;
             dragOffsetY = mouseY - fiber.pos.y;
-            fiberDrag = true;
+            fiberDrag = true;  //THESE TWO LINES (this and v) ARE SUPER IMPORTANT. ALSO AS WE ADD MORE ITEMS WE WILL HAVE TO SET THEM AS "FALSE" IN EVERY NON INSTANCE AS WELL
+            glassDrag = false;
+            //System.out.println("fiber: " + fiberDrag + " glass: " + glassDrag);
 
         }
 
@@ -106,6 +114,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             dragOffsetX = mouseX - glass.pos.x;
             dragOffsetY = mouseY - glass.pos.y;
             glassDrag = true;
+            fiberDrag = false;
+            //System.out.println("fiber: " + fiberDrag + " glass: " + glassDrag);
         }
 
     }
@@ -118,11 +128,19 @@ public void mouseDragged(MouseEvent e) {
         int newX = mouseX - dragOffsetX;
         int newY = mouseY - dragOffsetY;
 
-        if (fiberDrag == true) {
+        if (fiberDrag == true) { 
+
+            //int newX = mouseX - dragOffsetX;
+            //int newY = mouseY - dragOffsetY;
+
             fiber.setPosition(new Point(newX, newY));
         }
 
         if (glassDrag == true) {
+
+            //int newX = mouseX - dragOffsetX2;
+            //int newY = mouseY - dragOffsetY2;
+
             glass.setPosition(new Point(newX, newY));
         }
 
@@ -146,6 +164,7 @@ public void mouseDragged(MouseEvent e) {
     public void mouseReleased(MouseEvent e) {
         // when the mouse button is released
 
+        isDragging = false;
         fiberDrag = false;
         glassDrag = false;
 
