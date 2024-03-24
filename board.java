@@ -19,7 +19,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     // other
     private ActionListener listener;
     private boolean isDragging = false;
-    private int xOffset, yOffset;
+    private int dragOffsetX, dragOffsetY;
+    private Point draggedItemPosition;
 
     public board(ActionListener listener) {
         this.listener = listener;
@@ -47,8 +48,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
         super.paintComponent(g);
         drawBackground(g);
         drawGlass(g);
-        drawFiber(g);
         drawFiberglass(g);
+        drawFiber(g);
     }
 
     private void drawBackground(Graphics g) { // draw the bg, may look weird cuz its orginally supposed to be checkered
@@ -85,30 +86,30 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // when the mouse button is pressed on a component
-
         int mouseX = e.getX();
         int mouseY = e.getY();
-
-        if (mouseX >= fiber.pos.x * TILE_SIZE && mouseX < (fiber.pos.x + 1) * TILE_SIZE && mouseY >= fiber.pos.y * TILE_SIZE && mouseY < (fiber.pos.y + 1) ) {
+    
+        // check if the mouse is pressed on the fiber object
+        if (fiber != null && fiber.contains(new Point(mouseX, mouseY))) {
             isDragging = true;
-            xOffset = mouseX - fiber.pos.x * TILE_SIZE;
-            yOffset = mouseY - fiber.pos.y * TILE_SIZE;
+            dragOffsetX = mouseX - fiber.pos.x;
+            dragOffsetY = mouseY - fiber.pos.y;
         }
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        // when the mouse button is pressed on a component
-        if (isDragging) {
-            // update fiber pos
-            fiber.pos.x = (e.getX() - xOffset) / TILE_SIZE;
-            fiber.pos.y = (e.getY() - yOffset) / TILE_SIZE;
+public void mouseDragged(MouseEvent e) {
+    if (isDragging) {
+        int mouseX = e.getX();
+        int mouseY = e.getY();
+        int newX = mouseX - dragOffsetX;
+        int newY = mouseY - dragOffsetY;
 
-            // repaint board to update pos
-            repaint();
-        }
+        fiber.setPosition(new Point(newX, newY));
+        
+        repaint();
     }
+}
 
     @Override
     public void mouseReleased(MouseEvent e) {
