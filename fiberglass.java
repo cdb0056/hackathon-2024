@@ -33,7 +33,7 @@ public class fiberglass {
     public void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
-            final String imageName = "fiberglass insulation.png";
+            final String imageName = "fiberglass.png";
             image = ImageIO.read(new File("res/" + imageName));  // load in the image. placeholder image rn
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());

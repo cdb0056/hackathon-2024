@@ -22,9 +22,12 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     private ActionListener listener;
     private boolean isDragging = false;
     private int dragOffsetX, dragOffsetY;
-    private int dragOffsetX2, dragOffsetY2;
+    //private int dragOffsetX2, dragOffsetY2;
     private Point draggedItemPosition;
     //public Point mousePoint;
+
+    public int startPosX;
+    public int startPosY;
 
     public boolean fiberDrag = false;
     public boolean  glassDrag = false;
@@ -34,6 +37,12 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     public int glassPosX;
     public int glassPosY;
+    //drag rectangle
+    int draggableAreaX = 100; // x-coordinate of the top-left corner
+    int draggableAreaY = 100; // y-coordinate of the top-left corner
+    int draggableAreaWidth = 300; // width of the draggable area
+    int draggableAreaHeight = 200; // height of the draggable area
+
 
     public board(ActionListener listener) {
         this.listener = listener;
@@ -60,12 +69,20 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBackground(g);
+        drawDragRect(g);
         drawGlass(g);
         if (fiberglass.isVisible()) {
             drawFiberglass(g);
         }
         drawFiber(g);
         //combine(g);
+    }
+
+    private void drawDragRect(Graphics g) {
+
+        g.setColor(Color.BLACK);
+        g.drawRect(draggableAreaX, draggableAreaY, draggableAreaWidth, draggableAreaHeight);
+
     }
 
     private void drawBackground(Graphics g) { // draw the bg, may look weird cuz its orginally supposed to be checkered
@@ -174,16 +191,58 @@ public void mouseDragged(MouseEvent e) {
     public void mouseReleased(MouseEvent e) {
         // when the mouse button is released
 
+        /*if (fiberDrag) {
+
+            int newX = fiber.pos.x;
+            int newY = fiber.pos.y;
+            /*    if (newX >= draggableAreaX && newX + fiber.objectWidth <= draggableAreaX + draggableAreaWidth &&
+                newY >= draggableAreaY && newY + fiber.objectHeight <= draggableAreaY + draggableAreaHeight) {
+
+
+
+            // Object is within the draggable area, do nothing
+        } */  /*else {
+            // Object is outside the draggable area, return it to its start position
+            fiber.setPosition(new Point(fiber.getStartX(), fiber.getStartY()));
+
+            fiber.setPosition(new Point(fiber.getStartX(), fiber.getStartY()));
+
+        } 
+
+        }
+
+        if (glassDrag) {
+
+            int newX = glass.pos.x;
+            int newY = glass.pos.y;
+                if (newX >= draggableAreaX && newX + glass.objectWidth <= draggableAreaX + draggableAreaWidth &&
+                newY >= draggableAreaY && newY + glass.objectHeight <= draggableAreaY + draggableAreaHeight) {
+            // Object is within the draggable area, do nothing
+        }   else {
+            // Object is outside the draggable area, return it to its start position
+            glass.setPosition(new Point(glass.getStartX(), glass.getStartY()));
+
+            glass.setPosition(new Point(glass.getStartX(), glass.getStartY()));
+
+        }
+        }*/
+
         isDragging = false;
         fiberDrag = false;
         glassDrag = false;
         combine();
+
+        //repaint();
+
+        //repaint();
 
     }
 
     @Override 
     public void mouseClicked(MouseEvent e) {
         // when the mouse button has been clicked (pressed and released)
+
+
     }
 
     @Override 
