@@ -5,34 +5,31 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
+import java.awt.image.ImageObserver;
 
-public class fiber extends JPanel {
+public class fiber {
 
-    public BufferedImage image; // image to represent fibrs
+    private BufferedImage image; // image to represent fibrs
 
     public Point pos; // fiber's position on the screen
+    //public Point rectPos;
 
-    private boolean isVisible = true;
+    public int x = 100; //CHANGE THESE X, Y  TO CHANGE WHERE THE FABRIC SPAWNS. SAME FOR ALL OBJECTS
+    public int y = 100;
 
-    // getter method for visibility
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    // Setter method for visibility
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
-    }
 
     public fiber() { // put the fiber on the screen (its just a F for now but ill make some pictures
                      // later) 
-        loadImage();
-        pos = new Point(100, 100);
+        loadImage(); 
+        pos = new Point(x, y);
+        //pos.x = x;
+        //pos.y = y;
+        
 
     }
 
-    public void loadImage() { // function to actually load in the image, throws error if image not found or
+    private void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
             final String imageName = "fibers.png";
@@ -42,20 +39,36 @@ public class fiber extends JPanel {
         }
     }
 
-    public void draw(Graphics g, board b) { // draw the image
-        if (isVisible && image != null) {
-            int scaledWidth = 50;
-            int scaledHeight = 50;
-            g.drawImage(image, pos.x, pos.y, scaledWidth, scaledHeight, this);
-        }
+    public void draw(Graphics g, ImageObserver observer) { // draw the image
+        //if (image != null) {
+            g.drawImage(
+            image, pos.x, pos.y, 50, 50, observer
+        );
+        System.out.println("x: " + pos.x + " y: " + pos.y);
+        //}
     }
 
     public boolean contains(Point point) {
-        if (image != null) {
-            Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
-            return bounds.contains(point);
-        }
-        return false;
+        //rectPos.x = 200;
+        //rectPos.y = 200;
+
+        Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
+        return bounds.contains(point);
+
+        /* 
+        int objectWidth = image.getWidth();
+        int objectHeight = image.getHeight();
+
+        // Calculate the bounding box of the object
+        int objectLeft = pos.x;
+        int objectRight = pos.x + objectWidth;
+        int objectTop = pos.y;
+        int objectBottom = pos.y + objectHeight;
+
+        // Check if the point is within the bounding box
+        return (point.x >= objectLeft && point.x <= objectRight &&
+            point.y >= objectTop && point.y <= objectBottom);
+   */
     }
 
     public void setPosition(Point newPosition) {

@@ -4,30 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
+import java.awt.Rectangle;
 
 public class glass {
 
     private BufferedImage image; // image to represent glass
 
     public Point pos; // glass's position on the screen
-
-    private boolean isVisible = true;
-
-    // Getter method for visibility
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    // Setter method for visibility
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
-    }
+    public int x = 200;
+    public int y = 200;
 
     public glass() { // put the glass on the screen (its just a G for now but ill make some pictures later)
         loadImage(); 
-        pos = new Point(0,0);
+        pos = new Point(x, y);
     }
 
     private void loadImage() { // function to actually load in the image, throws error if image not found or smth
@@ -40,11 +30,9 @@ public class glass {
     }
 
     public void draw(Graphics g, ImageObserver observer) { // i guess draw the image on the board
-        if (isVisible && image != null) {
-            int scaledWidth = 50;
-            int scaledHeight = 50;
-            g.drawImage(image, pos.x, pos.y, scaledWidth, scaledHeight, observer);
-        }
+        g.drawImage(
+            image, pos.x, pos.y, 50, 50, observer
+        );
     }
 
     public boolean contains(Point point) {
@@ -55,4 +43,5 @@ public class glass {
     public void setPosition(Point newPosition) {
         this.pos = newPosition;
     }
+
 }
