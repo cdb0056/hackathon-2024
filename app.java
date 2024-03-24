@@ -32,7 +32,5 @@ public class app {
     // call the method :D 
     public static void main(String[] args) {
         initWindow(); // call the method to show the window
-
-        
     }
 }

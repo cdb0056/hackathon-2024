@@ -19,7 +19,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     // other
     private ActionListener listener;
     private boolean isDragging = false;
-    private int xOffset, yOffset;
+    private int dragOffsetX, dragOffsetY;
+    private Point draggedItemPosition;
 
     public board(ActionListener listener) {
         this.listener = listener;
@@ -45,10 +46,10 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawBackground(g);
-        drawGlass(g);
+        //drawBackground(g);
+        /*drawGlass(g);
+        drawFiberglass(g);*/
         drawFiber(g);
-        drawFiberglass(g);
     }
 
     private void drawBackground(Graphics g) { // draw the bg, may look weird cuz its orginally supposed to be checkered
@@ -90,10 +91,13 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
         int mouseX = e.getX();
         int mouseY = e.getY();
 
-        if (mouseX >= fiber.pos.x * TILE_SIZE && mouseX < (fiber.pos.x + 1) * TILE_SIZE && mouseY >= fiber.pos.y * TILE_SIZE && mouseY < (fiber.pos.y + 1) ) {
+        // check if the mouse is pressed on the fiber object
+        if (fiber != null && fiber.pos.x * TILE_SIZE <= mouseX && mouseX < (fiber.pos.x + 1) * TILE_SIZE &&
+            fiber.pos.y * TILE_SIZE <= mouseY && mouseY < (fiber.pos.y + 1) * TILE_SIZE) {
             isDragging = true;
-            xOffset = mouseX - fiber.pos.x * TILE_SIZE;
-            yOffset = mouseY - fiber.pos.y * TILE_SIZE;
+            dragOffsetX = mouseX - (fiber.pos.x * TILE_SIZE);
+            dragOffsetY = mouseY - (fiber.pos.y * TILE_SIZE);
+            draggedItemPosition = fiber.pos;
         }
     }
 
@@ -101,12 +105,16 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
     public void mouseDragged(MouseEvent e) {
         // when the mouse button is pressed on a component
         if (isDragging) {
-            // update fiber pos
-            fiber.pos.x = (e.getX() - xOffset) / TILE_SIZE;
-            fiber.pos.y = (e.getY() - yOffset) / TILE_SIZE;
+            int mouseX = e.getX();
+            int mouseY = e.getY();
+            int newX = (mouseX - dragOffsetX) / TILE_SIZE;
+            int newY = (mouseY - dragOffsetY) / TILE_SIZE;
 
-            // repaint board to update pos
-            repaint();
+            if (newX >= 0 && newY >= 0 && newX < COLUMNS && newY < ROWS) {
+                draggedItemPosition.x = newX;
+                draggedItemPosition.y = newY;
+                repaint();
+            }
         }
     }
 

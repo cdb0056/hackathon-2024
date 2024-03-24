@@ -5,12 +5,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class fiber {
 
-    private BufferedImage image; // image to represent fibrs
+    public BufferedImage image; // image to represent fibrs
 
     public Point pos; // fiber's position on the screen
 
@@ -20,7 +18,7 @@ public class fiber {
         pos = new Point(0, 0);
     }
 
-    private void loadImage() { // function to actually load in the image, throws error if image not found or
+    public void loadImage() { // function to actually load in the image, throws error if image not found or
                                // smth
         try {
             final String imageName = "fibers.png";
@@ -30,9 +28,9 @@ public class fiber {
         }
     }
 
-    public void draw(Graphics g, ImageObserver observer) { // i guess draw the image on the board
-        g.drawImage(
-            image, pos.x * board.TILE_SIZE, pos.y * board.TILE_SIZE, observer
-        );
+    public void draw(Graphics g, board b) { // draw the image
+        if (image != null) {
+            g.drawImage(image, pos.x * b.TILE_SIZE, pos.y * b.TILE_SIZE, null);
+        }
     }
 }
