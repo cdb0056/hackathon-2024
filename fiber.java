@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,5 +38,12 @@ public class fiber extends JPanel {
         }
     }
 
-    
+    public boolean contains(Point point) {
+        Rectangle bounds = new Rectangle(pos.x, pos.y, image.getWidth(), image.getHeight());
+        return bounds.contains(point);
+    }
+
+    public void setPosition(Point newPosition) {
+        this.pos = newPosition;
+    }
 }

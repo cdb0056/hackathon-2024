@@ -86,37 +86,30 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // when the mouse button is pressed on a component
-
         int mouseX = e.getX();
         int mouseY = e.getY();
-
+    
         // check if the mouse is pressed on the fiber object
-        if (fiber != null && fiber.pos.x * TILE_SIZE <= mouseX && mouseX < (fiber.pos.x + 1) * TILE_SIZE &&
-            fiber.pos.y * TILE_SIZE <= mouseY && mouseY < (fiber.pos.y + 1) * TILE_SIZE) {
+        if (fiber != null && fiber.contains(new Point(mouseX, mouseY))) {
             isDragging = true;
-            dragOffsetX = mouseX - (fiber.pos.x * TILE_SIZE);
-            dragOffsetY = mouseY - (fiber.pos.y * TILE_SIZE);
-            draggedItemPosition = fiber.pos;
+            dragOffsetX = mouseX - fiber.pos.x;
+            dragOffsetY = mouseY - fiber.pos.y;
         }
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-        // when the mouse button is pressed on a component
-        if (isDragging) {
-            int mouseX = e.getX();
-            int mouseY = e.getY();
-            int newX = (mouseX - dragOffsetX) / TILE_SIZE;
-            int newY = (mouseY - dragOffsetY) / TILE_SIZE;
+public void mouseDragged(MouseEvent e) {
+    if (isDragging) {
+        int mouseX = e.getX();
+        int mouseY = e.getY();
+        int newX = mouseX - dragOffsetX;
+        int newY = mouseY - dragOffsetY;
 
-            if (newX >= 0 && newY >= 0 && newX < COLUMNS && newY < ROWS) {
-                draggedItemPosition.x = newX;
-                draggedItemPosition.y = newY;
-                repaint();
-            }
-        }
+        fiber.setPosition(new Point(newX, newY));
+        
+        repaint();
     }
+}
 
     @Override
     public void mouseReleased(MouseEvent e) {
